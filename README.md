@@ -1,9 +1,28 @@
-# NPC角色卡动态加载器 v0.1
+# NPC角色卡动态加载器 v0.2
 
-在“群像世界主持人”聊天中，扫描最近6条消息；命中NPC名字/别名后，从 SillyTavern 已导入角色列表读取对应角色卡，并只在本轮生成Prompt里临时注入。
+适用于“群像世界主持人”作为唯一AI叙事者、其他SillyTavern角色卡作为NPC资料库的玩法。
 
-默认：每轮最多4张；读取 Description、Personality、Scenario、System Prompt、Post History Instructions；为节省Token默认不读取 Example Messages。
+## v0.2
+- `@娜娜` / `@EZ` / `@cc` 等可强制加载角色卡。
+- 当前用户消息中的人物优先。
+- 只用上一条AI回复辅助维持当前在场人物，不再扫描最近6条历史，减少旧角色持续占用Token。
+- 每轮最多4张角色卡。
+- 默认读取 Description / Personality / System Prompt / Post History Instructions。
+- 默认关闭 Scenario 与 Example Messages，避免旧场景和示例对话污染当前剧情、减少Token。
+- ASCII短名（EZ、cc）增加边界匹配，减少误触发。
+- “雅”“柔”不再作为裸单字别名，避免中文正文误触发。
+- 加入通用反行为固化规则：偶发动作不会自动变成人格习惯，职业不会吞掉人格。
 
-安装：解压后把整个“NPC角色卡动态加载器”文件夹放进当前用户 extensions 目录，重启/刷新酒馆并在扩展管理确认启用。
+## 默认映射
+- 伊蕾娜 / 娜娜 -> 伊蕾娜
+- 公孙雅柔 / 公孙雅 / 公孙柔 / 雅柔 -> 公孙雅柔
+- 露西亚 -> 露西亚
+- 芙宁娜 -> 芙宁娜
+- 千夏 -> 千夏
+- cc -> cc
+- EZ -> EZ
 
-若酒馆里的实际角色显示名不同，编辑 index.js 顶部 NPC_RULES 的 target。
+如果酒馆角色显示名不同，编辑 `index.js` 顶部 `NPC_RULES` 的 `target`。
+
+## Git更新
+将本版本三个文件覆盖到仓库根目录并提交，然后在SillyDroid扩展管理中对本扩展点刷新/更新。
