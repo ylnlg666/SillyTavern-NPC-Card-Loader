@@ -1,14 +1,15 @@
-# NPC角色卡动态加载器 v0.3
+# NPC角色卡动态加载器 v0.4
 
-v0.3 是可视化调试版。页面右下角会出现 `NPC Loader v0.3` 状态框。
+SillyTavern 1.19.0 兼容性诊断版。
 
-测试：
-1. 进入“群像世界主持人”聊天。
-2. 应先看到“扩展已启动，等待生成…”。
-3. 发送：`@娜娜 我看向她：“你怎么看？”`
-4. 生成开始时状态框应显示：`已加载：伊蕾娜（娜娜）`（实际显示名以角色卡为准）。
-5. 测试多人：`@娜娜 @EZ 你们分别怎么看？`
+- 使用 `hooks.activate` 初始化入口，并保留模块加载兜底。
+- 使用原生 toastr + 页面顶部诊断条双重提示。
+- 使用 `generate_interceptor` 拦截生成。
+- 优先用 `SillyTavern.getContext().setExtensionPrompt()` 注入，避免把调试内容写入真实聊天。
+- 普通名字即可触发，@名字不是必须。
+- 当前用户消息优先，上一条AI回复辅助维持在场NPC；每轮最多4卡。
 
-v0.3沿用v0.2逻辑：当前用户消息优先；上一条AI回复仅辅助维持在场人物；每轮最多4卡；默认不注入Scenario和Example Messages；带通用反行为固化规则。
+测试：刷新后应看到“NPC Loader v0.4 · 入口已执行 · 等待生成”或“模块已加载 · 等待生成”。
+然后在“群像世界主持人”发送“娜娜，你怎么看？”，生成时应显示“已加载：伊蕾娜（娜娜）”（实际名称以导入卡为准）。
 
-更新：将本ZIP中的 README.md、index.js、manifest.json 覆盖上传到GitHub仓库根目录并Commit，然后在SillyDroid扩展管理点击该扩展右侧更新按钮。
+更新：把 ZIP 根目录的 manifest.json、index.js、README.md 覆盖上传到 GitHub 仓库根目录并 Commit，再在 SillyDroid 中更新到 0.4.0 后刷新酒馆。

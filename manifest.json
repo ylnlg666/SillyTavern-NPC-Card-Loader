@@ -1,10 +1,17 @@
 {
   "display_name": "NPC角色卡动态加载器",
   "loading_order": 50,
+  "requires": [],
+  "optional": [],
   "js": "index.js",
+  "css": "",
   "author": "OpenAI / ChatGPT",
-  "version": "0.3.0",
+  "version": "0.4.0",
+  "homePage": "https://github.com/ylnlg666/SillyTavern-NPC-Card-Loader",
   "auto_update": false,
   "minimum_client_version": "1.19.0",
-  "generate_interceptor": "npcCardDynamicLoaderInterceptor"
+  "generate_interceptor": "npcCardDynamicLoaderInterceptor",
+  "hooks": {
+    "activate": "init"
+  }
 }
